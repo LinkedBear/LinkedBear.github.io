@@ -20,11 +20,11 @@
       
         <tags>
             
-            <tag> 声明式事务 </tag>
-            
             <tag> MyBatis </tag>
             
             <tag> 一级缓存 </tag>
+            
+            <tag> 声明式事务 </tag>
             
         </tags>
       
@@ -51,9 +51,9 @@
             
             <tag> Spring </tag>
             
-            <tag> Shiro </tag>
-            
             <tag> 声明式事务 </tag>
+            
+            <tag> Shiro </tag>
             
         </tags>
       
