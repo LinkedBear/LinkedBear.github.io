@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-08T06:59:59.226Z</updated>
+  <updated>2021-05-15T23:53:34.245Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2021.05.15  闲聊</title>
+    <link href="http://yoursite.com/2021/05/15/2021.05.15%20%20%E9%97%B2%E8%81%8A/"/>
+    <id>http://yoursite.com/2021/05/15/2021.05.15%20%20%E9%97%B2%E8%81%8A/</id>
+    <published>2021-05-15T13:30:00.000Z</published>
+    <updated>2021-05-15T23:53:34.245Z</updated>
+    
+    <content type="html"><![CDATA[<p>如果去大厂，但之前在传统行业公司，怕拿不下活，焦虑，该怎么办？不是怕累，是怕拿不下活</p><p>如果是针对接不下活，可以先观察，有一种思路可以参考：主动躺平放弃内卷（但需要考虑到年终评绩效时得 3.25 ）</p><hr><p>大小周 VS 单休但周六上班不干活</p><p>哪边更累呢？</p><blockquote><p>大小周，最终会收敛于单休</p></blockquote><hr><p>读源码时有的时候忘得快，因为平时用的也少，所以很难有比较深的印象</p><p>几个建议：</p><ul><li>读前大胆猜测</li><li>读时小心求证</li><li>读后认真记录总结</li><li>不定期回头反思</li></ul><hr><p>背所谓的面试八股文吗？</p><p>从来不，没意义，理解的去记最好。</p><hr><p>读源码的时候总是因为一些细节想要去了解，深入之后忘掉了整体，如何解决</p><p>要么自己记录下深入之前的点，要么借助已有资源帮你记录</p><blockquote><p>一个小 tip ，使用的鼠标最好带拇指侧键，方便读源码时前进后退</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      不定期直播唠嗑日常记录~
+    
+    </summary>
+    
+    
+      <category term="闲聊杂记" scheme="http://yoursite.com/categories/%E9%97%B2%E8%81%8A%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="杂记" scheme="http://yoursite.com/tags/%E6%9D%82%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring如何在运行期动态注册新的数据源？</title>
@@ -106,11 +129,11 @@
       <category term="不懂就问" scheme="http://yoursite.com/categories/%E4%B8%8D%E6%87%82%E5%B0%B1%E9%97%AE/"/>
     
     
+      <category term="声明式事务" scheme="http://yoursite.com/tags/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
+    
       <category term="MyBatis" scheme="http://yoursite.com/tags/MyBatis/"/>
     
       <category term="一级缓存" scheme="http://yoursite.com/tags/%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
-    
-      <category term="声明式事务" scheme="http://yoursite.com/tags/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
     
   </entry>
   
@@ -135,9 +158,9 @@
     
       <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
     
-      <category term="声明式事务" scheme="http://yoursite.com/tags/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
-    
       <category term="Shiro" scheme="http://yoursite.com/tags/Shiro/"/>
+    
+      <category term="声明式事务" scheme="http://yoursite.com/tags/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
     
   </entry>
   
