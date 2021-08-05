@@ -129,11 +129,11 @@
       <category term="不懂就问" scheme="http://yoursite.com/categories/%E4%B8%8D%E6%87%82%E5%B0%B1%E9%97%AE/"/>
     
     
-      <category term="声明式事务" scheme="http://yoursite.com/tags/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
-    
       <category term="MyBatis" scheme="http://yoursite.com/tags/MyBatis/"/>
     
       <category term="一级缓存" scheme="http://yoursite.com/tags/%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/"/>
+    
+      <category term="声明式事务" scheme="http://yoursite.com/tags/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
     
   </entry>
   
@@ -158,9 +158,9 @@
     
       <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
     
-      <category term="Shiro" scheme="http://yoursite.com/tags/Shiro/"/>
-    
       <category term="声明式事务" scheme="http://yoursite.com/tags/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
+    
+      <category term="Shiro" scheme="http://yoursite.com/tags/Shiro/"/>
     
   </entry>
   
