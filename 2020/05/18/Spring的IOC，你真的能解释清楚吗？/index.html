@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="LinkedBear的GitHub博客"><meta name="keywords" content="LinkedBear, SpringBoot, 源码"><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.4"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.4"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><title>Spring的IOC，你真的能解释清楚吗？ | LinkedBear的GitHub</title><meta name="generator" content="Hexo 4.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Spring的IOC，你真的能解释清楚吗？</h1><a id="logo" href="/.">LinkedBear的GitHub</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 所有文章</i></a><a href="/about/"><i class="fa fa-user"> 关于阿熊</i></a><a href="/juejin/"><i class="fa fa-rss"> 掘金小册</i></a><a href="/book/"><i class="fa fa-rss"> 纸质图书</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">Spring的IOC，你真的能解释清楚吗？</h1><div class="post-meta"><a href="/2020/05/18/Spring%E7%9A%84IOC%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E8%83%BD%E8%A7%A3%E9%87%8A%E6%B8%85%E6%A5%9A%E5%90%97%EF%BC%9F/#comments" class="comment-count"></a><p><span class="date">May 18, 2020</span><span><a href="/categories/SpringFramework/" class="category">SpringFramework</a></span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><p>一直以来，SpringFramework 作为 Java 企业级开发的老大哥，面试中也常被问到。虽说有些基础性的问题可能不那么特别被面试官和求职者重视，但如果真的问起来，能不能回答的准确、全面、有深度，还是很容易体现出水平的。</p>
+<p>在接下来的一个系列中，我会慢慢盘点一些 Spring 中常见但不好回答全面的问题，跟小伙伴们分享。</p>
+<p>本文主题：Spring 的 IOC 如何回答的尽可能全面、准确、有深度。</p>
+<h2 id="问：什么是IOC？"><a href="#问：什么是IOC？" class="headerlink" title="问：什么是IOC？"></a>问：什么是IOC？</h2><p>这是一个看上去特别简单、感觉很无脑的问题，很多求职者在回答这个问题时会不加思考、快速回答出一个很简单但同时也没有什么含量的答案。</p>
+<h4 id="草率的回答"><a href="#草率的回答" class="headerlink" title="草率的回答"></a>草率的回答</h4><ul>
+<li>IOC 是控制反转，Inverse of Control 。</li>
+</ul>
+<p>试问一句，亲，你在做名词翻译吗？</p>
+<p><img src="/2020/05/18/Spring%E7%9A%84IOC%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E8%83%BD%E8%A7%A3%E9%87%8A%E6%B8%85%E6%A5%9A%E5%90%97%EF%BC%9F/%E8%A1%A8%E6%83%85%E5%8C%85-%EF%BC%9F%EF%BC%9F%EF%BC%9F.jpg" alt></p>
+<p>就算真的是在做名词翻译，也不应该只是把这个简称的全称解释出来就完事吧，好歹的展开解释点东西也好吧，作为<strong>面试官不应该只想听到这么一点点</strong>吧。</p>
+<h4 id="方向偏了"><a href="#方向偏了" class="headerlink" title="方向偏了"></a>方向偏了</h4><ul>
+<li>IOC 是控制反转，它把对象间的依赖关系的维护权利交给了 Spring ，程序本身不再维护。</li>
+</ul>
+<p>这里面大体上把 IOC 的核心思想解释出来了：<strong>对象间的依赖关系的维护权利发生了转移</strong>，但是请小伙伴们注意，我们在问 IOC ，<strong>这个问题仅仅是问 IOC 本身，与具体的技术无关</strong>。<strong>IOC 不止有 Spring</strong> ，只是当下最强大的、使用最广的是 Spring 而已。</p>
+<p>所以小伙伴们在<strong>回答理论、概念等问题时，不要直接在概念解释中提到具体的技术，技术都是概念和理论的落地实现，不止一种</strong>。单把一种拉出来，面试官可能会觉得：你是不是只知道这个？</p>
+<h4 id="一种参考回答"><a href="#一种参考回答" class="headerlink" title="一种参考回答"></a>一种参考回答</h4><blockquote>
+<p>该答案仅供参考，可根据自身的知识储备动态调整。</p>
+</blockquote>
+<p>IOC 全名<strong>控制反转</strong> Inverse of Control，它是一种<strong>编程原则</strong>，它的设计和架构可以实现<strong>组件间的解耦</strong>，核心思想是<strong>将控制权转移出去</strong>。</p>
+<p>这里面提到了几个点：</p>
+<ul>
+<li>编程原则：它是一种<strong>理论</strong>，而非具体的某种技术落地</li>
+<li>组件间的解耦：所谓<strong>耦合</strong>，就是上面提到的<strong>对象间的依赖关系</strong>；<strong>解耦</strong>，就是<strong>解除了对象间的依赖关系</strong>。<ul>
+<li>提到解耦，有可能面试官会继续问“什么是解耦”，也有可能不会问 “为什么用 Spring ”了</li>
+</ul>
+</li>
+<li>控制权的转移：IOC 为了实现解耦，将原有的对象间的<strong>主动依赖改为被动接收型依赖</strong>（由直接 new 变为 set ）</li>
+</ul>
+<h2 id="问：IOC与DI的区别"><a href="#问：IOC与DI的区别" class="headerlink" title="问：IOC与DI的区别"></a>问：IOC与DI的区别</h2><p>如果对 IOC 的实现不是特别了解，或者只是用 SpringFramework 用的太习惯了，亦或是刻板的学习 SpringFramework ，那这个答案通常会是这样的：</p>
+<ul>
+<li>IOC 就是 DI 。</li>
+</ul>
+<p>如果回答出这个答案，而面试官碰巧也跟你一样，那恭喜你“瞎猫碰到死耗子”了！因为这个回答真的<strong>大错特错</strong>啊，IOC 不止有 DI 的！</p>
+<p>正确的回答应该是：</p>
+<ul>
+<li><strong>IOC 是一种思想、编程原则，DI 是 IOC 思想的一种实现方式。</strong></li>
+<li><strong>IOC 的实现方式有依赖查找（ Dependency lookup ）和依赖注入（ Dependency Injection ）。</strong></li>
+</ul>
+<p>上面已经介绍过了，IOC 仅仅是一种思想，它的意图是想让对象间的依赖控制发生转换。用过 SpringFramework 的小伙伴都知道，你没有在哪个地方见过直接写 IOC 的代码，都是由一些实现方式来体现 IOC 的。</p>
+<p>如果按照上面这样回答，可能会引来下面一个问题：</p>
+<h3 id="依赖查找和依赖注入分别都是什么？如何区分它们？"><a href="#依赖查找和依赖注入分别都是什么？如何区分它们？" class="headerlink" title="依赖查找和依赖注入分别都是什么？如何区分它们？"></a>依赖查找和依赖注入分别都是什么？如何区分它们？</h3><p>针对这个问题，最好不要一上来就搬出代码解释，最好是先理论后代码。</p>
+<p>一般情况下，对比依赖查找和依赖注入，通常可以从以下几个维度对比：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>依赖查找</th>
+<th>依赖注入</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实现方式</td>
+<td>使用上下文（容器）主动获取</td>
+<td>依赖上下文被动接收</td>
+</tr>
+<tr>
+<td>作用目标</td>
+<td>通常是方法体内的局部变量，也可以是对象成员</td>
+<td>通常是对象成员</td>
+</tr>
+<tr>
+<td>API依赖</td>
+<td>依赖 IOC 框架的 API（必须操纵容器的 API ）</td>
+<td>可以不依赖（暴露 setter 方法即可）</td>
+</tr>
+<tr>
+<td></td>
+<td>applicationContext.getBean(beanName)</td>
+<td>public void setXXX() { … }</td>
+</tr>
+</tbody></table>
+<h2 id="问：SpringFramework中实现的IOC有什么？"><a href="#问：SpringFramework中实现的IOC有什么？" class="headerlink" title="问：SpringFramework中实现的IOC有什么？"></a>问：SpringFramework中实现的IOC有什么？</h2><p>真的不会有小伙伴只能答出 <code>ApplicationContext</code> 吧，一开始学的时候应该知道还有个 <code>BeanFactory</code> 吧。这是 SpringFramework 中两个核心的 IOC 容器的抽象。<code>BeanFactory</code> 仅仅是提供了一个容器管理的基本能力，<code>ApplicationContext</code> 在此基础上做了更加完善、强大的扩展。具体的对比可以参照下表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Feature</th>
+<th align="left"><code>BeanFactory</code></th>
+<th align="left"><code>ApplicationContext</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Bean instantiation/wiring —— Bean的实例化和属性注入</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+</tr>
+<tr>
+<td align="left">Integrated lifecycle management —— 生命周期管理</td>
+<td align="left">No</td>
+<td align="left">Yes</td>
+</tr>
+<tr>
+<td align="left">Automatic <code>BeanPostProcessor</code> registration —— Bean后置处理器的支持</td>
+<td align="left">No</td>
+<td align="left">Yes</td>
+</tr>
+<tr>
+<td align="left">Automatic <code>BeanFactoryPostProcessor</code> registration —— BeanFactory后置处理器的支持</td>
+<td align="left">No</td>
+<td align="left">Yes</td>
+</tr>
+<tr>
+<td align="left">Convenient <code>MessageSource</code> access (for internalization) —— 消息转换服务（国际化）</td>
+<td align="left">No</td>
+<td align="left">Yes</td>
+</tr>
+<tr>
+<td align="left">Built-in <code>ApplicationEvent</code> publication mechanism —— 事件发布机制（事件驱动）</td>
+<td align="left">No</td>
+<td align="left">Yes</td>
+</tr>
+</tbody></table>
+<p>下面提供一个比较完整的示例答案，小伙伴们可以根据自己的知识储备和理解，调整这里面的一些描述细节：</p>
+<p><code>BeanFactory</code> 接口提供了一个<strong>抽象的配置和对象的管理机制</strong>，<code>ApplicationContext</code> 是 <code>BeanFactory</code> 的子接口，它<strong>简化了与 AOP 的整合、消息机制、事件机制</strong>，以及<strong>对 Web 环境的扩展</strong>（ <code>WebApplicationContext</code> 等），<code>BeanFactory</code> 是没有这些扩展的。</p>
+<p><code>ApplicationContext</code> 主要扩展了以下功能：（括号内的部分是解释扩展功能的一些简单描述或者原理底层实现，能回答出来更好）</p>
+<ul>
+<li><strong>AOP的支持</strong>（ <code>AnnotationAwareAspectJAutoProxyCreator</code> 作用于 Bean 的初始化之后 ）</li>
+<li><strong>配置元信息</strong>（ <code>BeanDefinition</code> 、<code>Environment</code> 、注解等 ）</li>
+<li><strong>资源管理</strong>（ <code>Resource</code> 抽象 ）</li>
+<li><strong>事件驱动机制</strong>（ <code>ApplicationEvent</code> 、<code>ApplicationListener</code> ）</li>
+<li><strong>消息与国际化</strong>（ <code>LocaleResolver</code> ）</li>
+<li><strong><code>Environment</code> 抽象</strong>（SpringFramework 3.1以后）</li>
+</ul>
+<h2 id="问：依赖注入的注入方式？有什么区别？"><a href="#问：依赖注入的注入方式？有什么区别？" class="headerlink" title="问：依赖注入的注入方式？有什么区别？"></a>问：依赖注入的注入方式？有什么区别？</h2><p>注意这个问题也是与 SpringFramework 无关的，注入的方式本身就应该是依赖注入的实现，至于框架的代码，那是人家对于这个方式的落地。</p>
+<p>可从以下几个维度对比：</p>
+<table>
+<thead>
+<tr>
+<th>注入方式</th>
+<th>被注入成员是否可变</th>
+<th>是否依赖IOC框架的API</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>构造器注入</td>
+<td>不可变</td>
+<td>否（xml、编程式注入不依赖）</td>
+<td>不可变的固定注入</td>
+</tr>
+<tr>
+<td>参数注入</td>
+<td>不可变</td>
+<td>是（只能通过标注注解来侵入式注入）</td>
+<td>通常用于不可变的固定注入</td>
+</tr>
+<tr>
+<td>setter注入</td>
+<td>可变</td>
+<td>否（xml、编程式注入不依赖）</td>
+<td>可选属性的注入</td>
+</tr>
+</tbody></table>
+<p>基本上问这个问题的话，还可能会继续问另一个问题：</p>
+<h3 id="你觉得哪种方式好？为什么？"><a href="#你觉得哪种方式好？为什么？" class="headerlink" title="你觉得哪种方式好？为什么？"></a>你觉得哪种方式好？为什么？</h3><p>“莽夫”应聘者一看终于来开放式问题了，赶紧开始自由发挥了：</p>
+<blockquote>
+<p>我觉得参数注入好，因为我写习惯了，给参数打注解多舒服啊！</p>
+</blockquote>
+<p>你是这么说了，面试官咋想：就这？就这？？？进而对你的印象可能就会有所减分了。</p>
+<p>这种问题，除了要表述主观看法之外，更多的是要<strong>根据一些既有的论述来辅助你的观点</strong>，最好的论述那一定是官方文档了。</p>
+<p>SpringFramework 的官方文档在不同的版本推荐的注入方式是不同的：</p>
+<ul>
+<li>SpringFramework <strong>4.0.2</strong> 及之前是推荐 setter 注入，理由是<strong>一个 Bean 有多个依赖时，构造器的参数列表会很长</strong>；而且如果 <strong>Bean 中依赖的属性不都是必需的话，注入会变得更麻烦</strong>；</li>
+<li><strong>4.0.3</strong> 及以后官方推荐构造器注入，理由是<strong>构造器注入的依赖是不可变的、完全初始化好的，且可以保证不为 null</strong> ；</li>
+<li>当然 <strong>4.0.3</strong> 及以后的官方文档中也说了，如果<strong>真的出现构造器参数列表过长的情况，可能是这个 Bean 承担的责任太多，应该考虑组件的责任拆解</strong>。</li>
+</ul>
+<h2 id="问：组件注入的注解有什么？有什么区别？"><a href="#问：组件注入的注解有什么？有什么区别？" class="headerlink" title="问：组件注入的注解有什么？有什么区别？"></a>问：组件注入的注解有什么？有什么区别？</h2><p>相信大多数小伙伴都能答出 <code>@Autowired</code> 和 <code>@Resource</code> 吧，如果答出这两个，那证明你应该用过，也会用。但你能回答出 <code>@Inject</code> ，证明你对这些注入的注解确实有了解。作为应聘者，在回答问题时一定是回答的<strong>尽可能全面</strong>为好，下面对这几种注解作一个对比：</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>注入方式</th>
+<th>是否支持@Primary</th>
+<th>来源</th>
+<th>Bean不存在时处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Autowired</td>
+<td>根据类型注入</td>
+<td>是</td>
+<td>SpringFramework原生注解</td>
+<td>可指定 required=false 来避免注入失败</td>
+</tr>
+<tr>
+<td>@Resource</td>
+<td>根据名称注入</td>
+<td>否</td>
+<td>JSR250规范</td>
+<td>容器中不存在指定Bean会抛出异常</td>
+</tr>
+<tr>
+<td>@Inject</td>
+<td>根据类型注入</td>
+<td>是</td>
+<td>JSR330规范 ( 需要导jar包 )</td>
+<td>容器中不存在指定Bean会抛出异常</td>
+</tr>
+</tbody></table>
+<p>跟上面差不多，如果问到了这个问题，那就有可能继续被问到下面一个问题：</p>
+<h3 id="存在多个相同类型Bean时如何解决注入问题？"><a href="#存在多个相同类型Bean时如何解决注入问题？" class="headerlink" title="存在多个相同类型Bean时如何解决注入问题？"></a>存在多个相同类型Bean时如何解决注入问题？</h3><p>可能大多数小伙伴都能答出以下几种解决方案：</p>
+<ul>
+<li><code>@Resource</code> ：根据名称指定注入的 Bean</li>
+<li><code>@Qualifier</code> ：配合 <code>@Autowired</code> 注解使用，如果被标注的成员 / 方法在根据类型注入时发现有多个相同类型的 Bean ，则会根据该注解声明的 name 寻找特定的 bean</li>
+<li><code>@Primary</code> ：配合 <code>@Bean</code> 注解使用，如果有多个相同类型的 Bean 同时注册到 IOC 容器中，使用 <code>@Autowired</code> 、<code>@Inject</code> 注解时会注入标注 <code>@Primary</code> 注解的 bean</li>
+</ul>
+<p>其实你还可以提另外一种方案：把<strong>注入的字段名与 bean 的名称保持一致</strong>，这样也可以解决注入时报不唯一 Bean 的问题。</p>
+<p>以上几个问题是关于 SpringFramework 与 IOC 部分的一些常见问题，倒是问题都不太陌生，但是小伙伴们想回答的全面、有深度，还是需要下下功夫的。希望小伙伴们能有所收获，在面试中流利回答，斩获 offer ！</p>
+<hr>
+<p>问题整理不易，不点个赞支持一下作者吗？（可怜巴巴）</p>
+</div><div class="post-copyright"><blockquote><p>原文作者: LinkedBear</p><p>原文链接: <a href="/http:/yoursite.com/2020/05/18/Spring%E7%9A%84IOC%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E8%83%BD%E8%A7%A3%E9%87%8A%E6%B8%85%E6%A5%9A%E5%90%97%EF%BC%9F/">http://yoursite.com/2020/05/18/Spring的IOC，你真的能解释清楚吗？/</a></p><p>版权声明: 转载请注明出处(必须保留作者署名及链接)</p></blockquote></div><div class="tags"><a href="/tags/Spring/">Spring</a><a href="/tags/IOC/">IOC</a></div><div class="post-share"><div class="social-share"><span>分享到:</span></div></div><div class="post-nav"><a href="/2020/06/09/Spring%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%8C%E4%BD%A0%E9%83%BD%E8%83%BD%E8%AF%B4%E5%85%A8%E5%90%97%EF%BC%9F%5B%E4%B8%8A%5D/" class="pre">Spring中使用的设计模式，你都能说全吗？[上]</a><a href="/2019/12/02/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%B9%E5%99%A8%EF%BC%9A%E5%B5%8C%E5%85%A5%E5%BC%8FTomcat%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E9%85%8D%E7%BD%AE/" class="next">嵌入式容器：嵌入式Tomcat的优化和配置</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问：什么是IOC？"><span class="toc-text">问：什么是IOC？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#草率的回答"><span class="toc-text">草率的回答</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方向偏了"><span class="toc-text">方向偏了</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一种参考回答"><span class="toc-text">一种参考回答</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问：IOC与DI的区别"><span class="toc-text">问：IOC与DI的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖查找和依赖注入分别都是什么？如何区分它们？"><span class="toc-text">依赖查找和依赖注入分别都是什么？如何区分它们？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问：SpringFramework中实现的IOC有什么？"><span class="toc-text">问：SpringFramework中实现的IOC有什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问：依赖注入的注入方式？有什么区别？"><span class="toc-text">问：依赖注入的注入方式？有什么区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#你觉得哪种方式好？为什么？"><span class="toc-text">你觉得哪种方式好？为什么？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问：组件注入的注解有什么？有什么区别？"><span class="toc-text">问：组件注入的注解有什么？有什么区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存在多个相同类型Bean时如何解决注入问题？"><span class="toc-text">存在多个相同类型Bean时如何解决注入问题？</span></a></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/05/15/2021.05.15%20%20%E9%97%B2%E8%81%8A/">2021.05.15  闲聊</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/05/08/Spring%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%9C%9F%E5%8A%A8%E6%80%81%E6%B3%A8%E5%86%8C%E6%96%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%9F/">Spring如何在运行期动态注册新的数据源？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/01/2020%E6%8E%98%E9%87%91%E5%B9%B4%E5%BA%A6%E5%BE%81%E6%96%87/">艰难又收获满满的2020</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/10/18/%E8%AE%B0%E3%80%90%E5%9C%A8%E6%8E%98%E9%87%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%9B%B4%E6%92%AD%E3%80%91/">记【在掘金的第一次直播】</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/28/%E3%80%90%E4%B8%8D%E6%87%82%E5%B0%B1%E9%97%AE%E3%80%91MyBatis%E7%9A%84%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E7%AB%9F%E7%84%B6%E8%BF%98%E4%BC%9A%E5%BC%95%E6%9D%A5%E9%BA%BB%E7%83%A6%EF%BC%9F/">【不懂就问】MyBatis的一级缓存竟然还会引来麻烦？</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/24/%E3%80%90%E4%B8%8D%E6%87%82%E5%B0%B1%E9%97%AE%E3%80%91SpringFramework%E4%B8%AD%E7%9A%84%E6%B3%A8%E8%A7%A3%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%80%8E%E4%B9%88%E8%A2%ABShiro%E6%90%9E%E5%A4%B1%E6%95%88%E4%BA%86/">【不懂就问】SpringFramework中的注解声明式事务怎么被Shiro搞失效了</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/13/Spring%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%8C%E4%BD%A0%E9%83%BD%E8%83%BD%E8%AF%B4%E5%85%A8%E5%90%97%EF%BC%9F%5B%E4%B8%8B%5D/">Spring中使用的设计模式，你都能说全吗？[下]</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/09/Spring%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%8C%E4%BD%A0%E9%83%BD%E8%83%BD%E8%AF%B4%E5%85%A8%E5%90%97%EF%BC%9F%5B%E4%B8%8A%5D/">Spring中使用的设计模式，你都能说全吗？[上]</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/18/Spring%E7%9A%84IOC%EF%BC%8C%E4%BD%A0%E7%9C%9F%E7%9A%84%E8%83%BD%E8%A7%A3%E9%87%8A%E6%B8%85%E6%A5%9A%E5%90%97%EF%BC%9F/">Spring的IOC，你真的能解释清楚吗？</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/02/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%B9%E5%99%A8%EF%BC%9A%E5%B5%8C%E5%85%A5%E5%BC%8FTomcat%E7%9A%84%E4%BC%98%E5%8C%96%E5%92%8C%E9%85%8D%E7%BD%AE/">嵌入式容器：嵌入式Tomcat的优化和配置</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/">SpringBoot</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringFramework/">SpringFramework</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%8D%E6%87%82%E5%B0%B1%E9%97%AE/">不懂就问</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8E%98%E9%87%91%E6%97%A5%E8%AE%B0/">掘金日记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E8%81%8A%E6%9D%82%E8%AE%B0/">闲聊杂记</a><span class="category-list-count">1</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/" style="font-size: 15px;">声明式事务</a> <a href="/tags/2020/" style="font-size: 15px;">2020</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/IOC/" style="font-size: 15px;">IOC</a> <a href="/tags/MyBatis/" style="font-size: 15px;">MyBatis</a> <a href="/tags/%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98/" style="font-size: 15px;">一级缓存</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 15px;">杂记</a> <a href="/tags/SpringBoot/" style="font-size: 15px;">SpringBoot</a> <a href="/tags/Tomcat/" style="font-size: 15px;">Tomcat</a> <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AE%B9%E5%99%A8/" style="font-size: 15px;">嵌入式容器</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/Shiro/" style="font-size: 15px;">Shiro</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 所有文章</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">1</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 外部链接</i></div><ul></ul><a href="https://github.com/LinkedBear" title="GitHub" target="_blank">GitHub</a><ul></ul><a href="https://juejin.cn/user/3808363977640301/books?type=wrote" title="掘金小册" target="_blank">掘金小册</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |  <a href="/atom.xml">订阅本站</a> |  <a href="/about/">联系博主</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/." rel="nofollow">LinkedBear.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.4"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.4" async></script><link rel="stylesheet" type="text/css" href="/share/css/share.css"><script type="text/javascript" src="/share/js/social-share.js" charset="utf-8"></script><script type="text/javascript" src="/share/js/qrcode.js" charset="utf-8"></script></body></html>
